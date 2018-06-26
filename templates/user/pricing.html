@@ -1,0 +1,22 @@
+<body style="background-color:#cccccc; text-align:center; font-family:Arial; padding-top: 50px;">
+	<h1 style="color:red">{{title}}</h1>
+	<h3 style="color:green;">Products</h3>
+
+	<div style="width:400px; margin:auto;">
+		<ul style="text-align:left;">
+			{% for p in products %}
+			<li>
+				<b style="color:blue;">{{p.service}}</b>
+				<div>{{p.description}}</div>
+				<div style="margin-bottom: 40px;">${{p.price}}</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<a href="/">Home Page</a>&nbsp
+	<a href="/about">About Us</a>&nbsp
+	<a href="/blog">Blog</a>&nbsp
+	<a href="/pricing">Services</a>
+	<a href="/gallery">Users</a>
+</body>
