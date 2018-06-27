@@ -5,42 +5,37 @@ from resources.functions import *
 
 @app.route('/')
 def index():
-	content ={}
-	content['title'] = "Natural Woman Salon | Home"
-	content['post_data'] = 0
+	content = index_content()
 	return render_template('user/index.html', **content)
 
-@app.route('/pricing')
-def pricing():
-	content = {}
-	content['title'] = "Natural Woman Salon | Pricing"
-	content['post_data'] = 4
-	products = get_products()
-	content['products'] = products
-	print("Number of Products: " + str(len(products)))
-	print(products)
-	return render_template('user/pricing.html', **content)
+@app.route('/home')
+def home():
+	content = home_content()
+	return render_template('user/index.html', **content)
 
 @app.route('/about')
 def about():
-	content = {}
-	content['title'] = "Natural Woman Salon | About Us"
-	content['post_data'] = 3
-	content['about'] = get_current_about()
+	content = about_content()
 	return render_template('user/about.html', **content)
 
-@app.route('/blog')
-def blog():
-	content = {}
-	content['title'] = "Natural Woman Salon | Blog"
-	content['post_data'] = 5
-	content['blogs'] = get_blog()
-	return render_template('user/blog.html', **content)
+@app.route('/products')
+def products():
+	content = product_content()
+	return render_template('user/pricing.html', **content)
 
 @app.route('/gallery')
 def gallery():
-	content = {}
-	content['title'] = "Natural Woman Salon | Users"
-	content['post_data'] = 4
+	content = gallery_content()
 	content['users'] = get_users()
 	return render_template('user/gallery.html', **content)
+
+@app.route('/blog')
+def blog():
+	content = blog_content()
+	return render_template('user/blog.html', **content)
+
+@app.route('/contact')
+def contact():
+	content = contact_content()
+	return render_template('user/contact.html', **content)
+

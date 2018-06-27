@@ -24,6 +24,10 @@ class User(db.Model):
         password = bcrypt.generate_password_hash(plaintext_password)
         self.password = password
 
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password)
+        db.session.commit()
+
     def is_correct_password(plaintext_password):
         return bcrypt.check_password_hash(self.password, plaintext_password)
 

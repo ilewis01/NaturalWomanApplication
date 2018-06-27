@@ -12,7 +12,8 @@ from resources.functions import *
 from resources.models import *
 
 init_database()
-
+# product = fetch_product(1)
+# print("Product: " + str(product.service))
 
 if __name__ == '__main__':
     app.debug = True
