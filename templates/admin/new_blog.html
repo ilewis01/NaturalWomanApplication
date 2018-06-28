@@ -1,0 +1,15 @@
+<body style="font-family:Arial; text-align:center; font-size:14px; color:black;">
+	<h1>{{title}}</h1>
+	<h2>Add a new blog...</h2>
+
+	<form action="/added_blog" method="post">
+		<div><input type="text" name="subject" id="subject" placeholder="Subject" required style="width:400px;"></div><br><br>
+		<textarea rows="30" cols="100" name="content" id="content" placeholder"Blog Content"></textarea><br>
+		<input type="submit" value="Submit">
+	</form>
+
+	<a href="/admin_home">Back to Admin</a> &nbsp&nbsp
+	<a href="/">Logout</a>
+	<p>Page Index: {{btn_data}}</p>
+
+</body>

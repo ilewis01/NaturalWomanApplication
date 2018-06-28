@@ -13,18 +13,27 @@ def init_database():
 	s3 = "Beat Yo Shit"
 	u1 = User("Phony", "Dude", "phony@fuckmail.com", "passwerd123")
 	u2 = User("Fake", "Bitch", "fake@hotmess.com", "dumbshit")
+	u3 = User("Test", "User", "test@test.com", "1234")
 	b1 = Blog("Blog entry 1", "This is just some dumb ass shit that I am typing to create this")
 	b2 = Blog("Put it up", "This is just another meaningless sentence")
 	a1 = About("This is a dumb about statement")
 	p1 = Product(s1, "Get that dirty shit smelling good", 30)
 	p2 = Product(s2, "Is yo shit nappy? Come get a damn perm bitch", 40)
-	p3 = Product(s3, "Get yo shit tight for the club tonight so you can ind yourself a man", 80)
+	p3 = Product(s3, "Get yo shit tight for the club tonight so you can find yourself a man", 80)
+
+	a2 = About("This is another about us statement.")
+	a3 = About("Writing stuff to fill up this third about us statement.")
+	a2.is_current = False
+	a3.is_current = False
 
 	db.session.add(u1)
 	db.session.add(u2)
+	db.session.add(u3)
 	db.session.add(b1)
 	db.session.add(b2)
-	db.session.add(a1)	
+	db.session.add(a1)
+	db.session.add(a2)
+	db.session.add(a3)	
 	db.session.add(p1)
 	db.session.add(p2)
 	db.session.add(p3)
@@ -87,6 +96,91 @@ def contact_content():
 	content['title'] = "Natural Woman Salon | Contact Us"
 	content['btn_data'] = 5
 	return content
+
+def admin_home_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Administration"
+	content['btn_data'] = 6
+	return content
+
+def new_blog_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | New Blog Post"
+	content['btn_data'] = 6
+	return content
+
+def blog_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Manage Blog Post"
+	content['btn_data'] = 7
+	content['blogs'] = get_formatted_blogs()
+	return content
+
+def about_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Administration"
+	content['btn_data'] = 8
+	current = About.query.filter_by(is_current=True).one()
+	abouts = About.query.all()
+	a_list = []
+	for a in abouts:
+		if a.id != current.id:
+			a_list.append(a)
+	content['current'] = current
+	content['inactive'] = a_list
+	return content
+
+def product_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Product Management"
+	content['btn_data'] = 9
+	content['products'] = Product.query.all()
+	return content
+
+def gallery_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Gallery Management"
+	content['btn_data'] = 10
+	return content
+
+def company_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | Admin Tools"
+	content['btn_data'] = 11
+	return content
+
+def account_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | My Account"
+	content['btn_data'] = 12
+	return content
+
+def user_tool_content():
+	content = {}
+	content['title'] = "Natural Woman Salon | User Management"
+	content['btn_data'] = 13
+	content['users'] = get_model_list("User") #be sure to edit this and limit who shows up
+	return content
+
+def get_formatted_blogs():
+	blogs = Blog.query.all()
+	b_list = []
+	for b in blogs:
+		data = {}
+		date = date_format(b.date)
+		data['f_date'] = date
+		data['blog'] = b
+		b_list.append(data)
+	return b_list
+
+def exclude_current_about(aid):
+	results = []
+	aid = int(aid)
+	a_list = fetch_about(aid)
+	for a in a_list:
+		if int(a.id) != aid:
+			results.append(a)
+	return results
 
 def get_users():
 	return User.query.all()

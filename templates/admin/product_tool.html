@@ -1,0 +1,18 @@
+<body style="font-family:Arial; text-align:center; font-size:14px; color:black;">
+	<h1>{{title}}</h1>
+	<h2>Manage prices and product descriptions here...</h2>
+
+	<form action="/product_edited" method="post">
+		<ul>
+			{% for p in products %}
+			<a href="javascript: load_products_editor('p.pd')">
+				<li>{{p.service}} - <b>${{p.price}}</b></li>
+			</a>
+			{% endfor %}
+		</ul>
+	</form>
+
+	<a href="/admin_home">Back to Admin</a> &nbsp&nbsp
+	<a href="/">Logout</a>
+	<p>Page Index: {{btn_data}}</p>
+</body>

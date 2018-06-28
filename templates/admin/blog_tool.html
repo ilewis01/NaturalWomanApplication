@@ -1,0 +1,19 @@
+<body style="font-family:Arial; text-align:center; font-size:14px; color:black;">
+	<h1>{{title}}</h1>
+	<h2>Edit and delete existing blogs here.</h2>
+
+	<h4>Click to edit...</h4>
+	<ul>
+		{% for b in blogs %}
+			<a href="javascdript: load_blog_editor('{{b.id}}')">
+				<li>
+					<b>{{b.f_date}}</b> - {{b.blog.subject}} &nbspID: {{b.blog.id}}
+				</li>
+			</a>
+		{% endfor %}
+	</ul>
+
+	<a href="/admin_home">Back to Admin</a> &nbsp&nbsp
+	<a href="/">Logout</a>
+	<p>Page Index: {{btn_data}}</p>
+</body>

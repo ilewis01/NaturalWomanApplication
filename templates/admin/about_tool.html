@@ -1,0 +1,20 @@
+<body style="font-family:Arial; text-align:center; font-size:14px; color:black;">
+	<h1>{{title}}</h1>
+	<h2>Manage and swap the about us statement</h2>
+	<br><br><br>
+	<div style="padding:10px; border:1px solid black; width:40%; margin:auto;"><b><em>CURRENT STATEMENT:</em></b><br>{{current.statement}}<br><button onClick="javascript: load_about_editor('{{current.id}}');">Edit</button></div>
+
+	<form action="/about_edited" method="post">
+		<ul>
+			{% for i in inactive %}
+			<a href="javascript: load_about_editor('{{i.id}}');">
+				<li>{{i.statement}}</li>
+			</a><br>
+			{% endfor %}
+		</ul>
+	</form>
+
+	<a href="/admin_home">Back to Admin</a> &nbsp&nbsp
+	<a href="/">Logout</a>
+	<p>Page Index: {{btn_data}}</p>
+</body>
